@@ -1,20 +1,20 @@
 const asyncHandler = require('express-async-handler')
 const axios = require('axios');
 
-const Test = require('../models/testModel')
-// @desc Get test
-// @route  GET /api/test
+const Book = require('../models/bookModel')
+// @desc Get book
+// @route  GET /api/book
 // @access Private
-const getTests = asyncHandler(async (req, res) => {
+const getBooks = asyncHandler(async (req, res) => {
 	console.log("Get");
-	const test = await Test.find()
-	res.status(200).json(test)
+	const book = await Book.find()
+	res.status(200).json(book)
 })
 
-// @desc Set test
-// @route  POST /api/test
+// @desc Set book
+// @route  POST /api/book
 // @access Private
-const setTest = asyncHandler(async (req, res) => {
+const setBook = asyncHandler(async (req, res) => {
 
   const country = 'germany';
   let url = `https://www.googleapis.com/books/v1/volumes?q=${country}`;
@@ -25,7 +25,7 @@ const setTest = asyncHandler(async (req, res) => {
 		      //res.status(200);
 		      for(let i = 0; i < response.data.items.length; i++){
 						try{
-						const test = await Test.create({
+						const book = await Book.create({
 							"country": country,
 							"id": response.data.items[i].id, 
 							"selfLink": response.data.items[i].selfLink, 
@@ -56,7 +56,7 @@ const setTest = asyncHandler(async (req, res) => {
 						})
 
 						console.log("New ", i);
-						res.status(200).json(test);
+						res.status(200).json(book);
 					}catch(err){
 						console.error(err);
 					}
@@ -74,43 +74,43 @@ const setTest = asyncHandler(async (req, res) => {
 
 })
 
-// @desc Update test
-// @route  PUT /api/test
+// @desc Update book
+// @route  PUT /api/book
 // @access Private
-const updateTest = asyncHandler(async (req, res) => {
-	const test = await Test.findById(req.params.id)
+const updateBook = asyncHandler(async (req, res) => {
+	const book = await Book.findById(req.params.id)
 
-	if(!test){
+	if(!book){
 		res.status(400)
-		throw new Error('Test not found')
+		throw new Error('Book not found')
 	}
 
-	const updatedTest = await Test.findByIdAndUpdate(req.params.id,req.body,{
+	const updatedBook = await Book.findByIdAndUpdate(req.params.id,req.body,{
 		new: true,
 	})
 
-	res.status(200).json(updatedTest)
+	res.status(200).json(updatedBook)
 })
 
-// @desc Delete tests
-// @route  DELETE /api/tests
+// @desc Delete books
+// @route  DELETE /api/books
 // @access Private
-const deleteTest = asyncHandler(async (req, res) => {
-	const test = await Test.findById(req.params.id)
+const deleteBook = asyncHandler(async (req, res) => {
+	const book = await Book.findById(req.params.id)
 
-	if(!test){
+	if(!book){
 		res.status(400)
-		throw new Error('Test not found')
+		throw new Error('Book not found')
 	}
 
-	await test.remove()
+	await book.remove()
 
 	res.status(200).json({ id: req.params.id })
 })
 
 module.exports = {
-	getTests,
-	setTest,
-	updateTest,
-	deleteTest
+	getBooks,
+	setBook,
+	updateBook,
+	deleteBook
 }

@@ -27,20 +27,20 @@ const setMovie = asyncHandler(async (req, res) => {
 						try{
 						const movie = await Movie.create({
 		   					country: country,
-   							id: response.data.items[i].id,
-  							adult: response.data.items[i].adult,
-  			 				backdrop_path: response.data.items[i].backdrop_path,
-   							genre_ids: response.data.items[i].genre_ids,
-  							original_language: response.data.items[i].original_language,
-   							original_title: response.data.items[i].original_title,
-   							overview: response.data.items[i].overview,
-   							popularity: response.data.items[i].popularity,
-   							poster_path: response.data.items[i].poster_path,
-   							release_date: response.data.items[i].release_date,
-   							title: response.data.items[i].title,
-   							video: response.data.items[i].video,
-   							vote_average: response.data.items[i].vote_average,
-   							vote_count: response.data.items[i].vote_count
+   							id: response.data.results[i].id,
+  							adult: response.data.results[i].adult,
+  			 				backdrop_path: response.data.results[i].backdrop_path,
+   							genre_ids: response.data.results[i].genre_ids,
+  							original_language: response.data.results[i].original_language,
+   							original_title: response.data.results[i].original_title,
+   							overview: response.data.results[i].overview,
+   							popularity: response.data.results[i].popularity,
+   							poster_path: response.data.results[i].poster_path,
+   							release_date: response.data.results[i].release_date,
+   							title: response.data.results[i].title,
+   							video: response.data.results[i].video,
+   							vote_average: response.data.results[i].vote_average,
+   							vote_count: response.data.results[i].vote_count
 
 						})
 

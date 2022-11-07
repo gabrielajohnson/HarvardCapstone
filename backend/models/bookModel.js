@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const testSchema = mongoose.Schema({
+const bookSchema = mongoose.Schema({
 	country: {type: String},
 	id: {type: String},
 	selfLink: {type: String},
@@ -34,4 +34,4 @@ const testSchema = mongoose.Schema({
 }
 )
 
-module.exports = mongoose.model('Test', testSchema)
+module.exports = mongoose.model('Book', bookSchema)

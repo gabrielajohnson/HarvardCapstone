@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const podcastSchema = mongoose.Schema({
+const movieSchema = mongoose.Schema({
    country: {type: String},
    id: {type: Number},
    adult:{type: Boolean},
@@ -9,12 +9,12 @@ const podcastSchema = mongoose.Schema({
    original_language: {type: String},
    original_title: {type: String},
    overview: {type: String},
-   popularity: {type: Double},
+   popularity: {type: Number},
    poster_path: {type: String},
    release_date: {type: String},
    title: {type: String},
    video: {type: Number},
-   vote_average: {type: Double},
+   vote_average: {type: Number},
    vote_count: {type: Number}
 
 },   
@@ -23,4 +23,4 @@ const podcastSchema = mongoose.Schema({
 }
 )
 
-module.exports = mongoose.model('Podcast', podcastSchema)
+module.exports = mongoose.model('Movie', movieSchema)
