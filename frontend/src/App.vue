@@ -1,38 +1,32 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-
-</script>
-
 <script>
 import axios from "axios";
 export default {
   name: "App",
   data() {
     return {
-      books: [],
+      todos: [],
       description: "",
       title: "",
     };
   },
   async mounted() {
     const response = await axios.get("api/books/");
-    this.books = response.data;
+    this.todos = response.data;
   },
   methods: {
-    async addBook(e) {
+    async addTodo(e) {
       e.preventDefault();
       const response = await axios.post("api/books/", {
         title: this.title,
         description: this.description
       });
-      this.books.push(response.data);
+      this.todos.push(response.data);
       this.title = "";
       this.description = "";
     },
-    async removeBook(item, i) {
+    async removeTodo(item, i) {
       await axios.delete("api/books/" + item._id);
-      this.books.splice(i, 1);
+      this.todos.splice(i, 1);
     },
   }
 };
@@ -40,92 +34,106 @@ export default {
 
 <template>
  <div class="main">
-  <h3>Book List</h3>
+  <h3>Todo List</h3>
 
   <form class="form" >
-    <input class="input" v-model="title" type="text" name="name" placeholder="Enter book" />
+    <input class="input" v-model="title" type="text" name="name" placeholder="Enter todo" />
     <br />
     <input class="input" v-model="description" type="text" name="description"  placeholder="Enter Description" />
     <br />
-    <button class="submit-button" @click="addBook">Add Book</button>
+    <button class="submit-button" @click="addTodo">Add Todo</button>
   </form>
-  <div class="book-container">
+  <div class="todo-container">
     <ul>
-      <li v-for="(book, i) in books" :key="book._id">
-        <div class="book">
-        <span class="book-name">{{ book.title }}</span>
-        <span class="book-description">{{ book.description }}</span>
+      <li v-for="(todo, i) in todos" :key="todo._id">
+        <div class="todo">
+        <span class="todo-name">{{ todo.volumeInfo.title }}</span>
+        <span class="todo-description">{{ todo.description }}</span>
       </div>
-        <button class="delete-btn" @click="removeBook(book, i)">DELETE BOOK</button>
+        <button class="delete-btn" @click="removeTodo(todo, i)">DELETE TODO</button>
       </li>
     </ul>
   </div>
   </div>
 </template>
 
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 10vh;
+<style>
+.main {
+  margin: auto;
+  margin-top: 3rem;
+  max-width: 400px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-  height: 25px;
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
+ h3{
+  font-size: 22px;
+  font-weight: bold;
   text-align: center;
-  margin-top: 0;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.input {
+  width: 100%;
+  padding: 10px;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.submit-button {
+  width: 400px;
+  padding: 10px;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.todo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-nav a:first-of-type {
-  border: 0;
+.todo-container ul {
+  width: 100%;
+  list-style: none;
+  padding: 0;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+.todo-container ul li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+.todo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px;
+  max-width: 250px;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-    width: 100%;
-  }
+.todo-name {
+  font-size: 18px;
+  font-weight: bold;
+}
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+.todo-description {
+  max-width: 70%;
+  font-size: 14px;
+}
 
-    padding: 1rem 0;
-    margin-top: 0;
-  }
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
 }
 </style>
