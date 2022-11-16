@@ -2,13 +2,35 @@ const asyncHandler = require('express-async-handler')
 const axios = require('axios');
 
 const Book = require('../models/bookModel')
+
+// @desc Get book
+// @route  GET /api/book/:id
+// @access Private
+const getBook = asyncHandler(async (req, res) => {
+	console.log("Get 1");
+
+	const book = await Book.find({id: req.params.id});
+
+	if(!book){
+		res.status(400)
+		throw new Error('Book not found')
+	}
+	
+	res.status(200).json(book)
+
+})
+
 // @desc Get book
 // @route  GET /api/book
 // @access Private
 const getBooks = asyncHandler(async (req, res) => {
 	console.log("Get");
-	const book = await Book.find()
-	res.status(200).json(book)
+	//console.log(req);
+
+	const books = await Book.find({country: req.params.country});
+	
+	
+	res.status(200).json(books)
 })
 
 // @desc Set book
@@ -109,6 +131,7 @@ const deleteBook = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
+	getBook,
 	getBooks,
 	setBook,
 	updateBook,

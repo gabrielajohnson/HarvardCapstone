@@ -1,67 +1,95 @@
 <script>
 import axios from "axios";
+/*import SearchResults from './components/pages/SearchResults.vue'*/
+
 export default {
   name: "App",
+  components: {
+    /*SearchResults*/
+  },
   data() {
     return {
-      todos: [],
+      links: ['Home','Search'],
+      paths: {
+        Home: '/',
+        Search: '/search'
+      },
+      books: [],
       description: "",
       title: "",
     };
   },
   async mounted() {
     const response = await axios.get("api/books/");
-    this.todos = response.data;
+    this.books = response.data;
   },
   methods: {
-    async addTodo(e) {
+    async addBook(e) {
       e.preventDefault();
       const response = await axios.post("api/books/", {
         title: this.title,
         description: this.description
       });
-      this.todos.push(response.data);
+      this.books.push(response.data);
       this.title = "";
       this.description = "";
     },
-    async removeTodo(item, i) {
+    async removeBook(item, i) {
       await axios.delete("api/books/" + item._id);
-      this.todos.splice(i, 1);
+      this.books.splice(i, 1);
     },
   }
 };
 </script>
 
 <template>
- <div class="main">
-  <h3>Todo List</h3>
 
-  <form class="form" >
-    <input class="input" v-model="title" type="text" name="name" placeholder="Enter todo" />
-    <br />
-    <input class="input" v-model="description" type="text" name="description"  placeholder="Enter Description" />
-    <br />
-    <button class="submit-button" @click="addTodo">Add Todo</button>
-  </form>
-  <div class="todo-container">
+ <div class="main">
+  <nav>
+    <h3>Learning Locus</h3>
+  </nav>
     <ul>
-      <li v-for="(todo, i) in todos" :key="todo._id">
-        <div class="todo">
-        <span class="todo-name">{{ todo.volumeInfo.title }}</span>
-        <span class="todo-description">{{ todo.description }}</span>
-      </div>
-        <button class="delete-btn" @click="removeTodo(todo, i)">DELETE TODO</button>
+      <li>
+        <router-link v-for="link in links"
+         v-bind:key="link"
+         v-bind:to="paths[link]"
+         exact
+         :data-test="link + '-link'">
+          {{ link }}
+        </router-link>
       </li>
     </ul>
-  </div>
+
+    <router-view></router-view>
+
+
+  <!--<div class="main-container">
+    <SearchResults></SearchResults>
+  </div>-->
   </div>
 </template>
 
 <style>
+
+*{
+  font-family:arial; 
+}
+
+a{
+  text-decoration: none;
+}
+
+body{
+  margin: 0;
+}
+
+nav{
+  background:lightgrey;
+  text-align: left;
+}
+
 .main {
   margin: auto;
-  margin-top: 3rem;
-  max-width: 400px;
 }
 
 .form {
@@ -71,9 +99,10 @@ export default {
 }
 
  h3{
-  font-size: 22px;
-  font-weight: bold;
-  text-align: center;
+  font-size: 20px;
+  margin: 0;
+  font-weight: normal;
+  padding:10px;
 }
 
 .input {
@@ -89,19 +118,19 @@ export default {
   cursor: pointer;
 }
 
-.todo-container {
+.main-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.todo-container ul {
+.main-container ul {
   width: 100%;
   list-style: none;
   padding: 0;
 }
 
-.todo-container ul li {
+.main-container ul li {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -110,7 +139,7 @@ export default {
   border-bottom: 1px solid #e0e0e0;
 }
 
-.todo {
+.book {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -119,12 +148,11 @@ export default {
   max-width: 250px;
 }
 
-.todo-name {
+.book-name {
   font-size: 18px;
-  font-weight: bold;
 }
 
-.todo-description {
+.book-description {
   max-width: 70%;
   font-size: 14px;
 }
