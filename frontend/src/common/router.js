@@ -13,9 +13,9 @@ const routes = [
         component: () => import('@/components/pages/SearchResults.vue'),
     },
     {
-        name: 'media',
+        name: 'bookMedia',
         path: '/media/books/:id',
-        component: () => import('@/components/pages/ResultDetail.vue'),
+        component: () => import('@/components/pages/BookResultDetail.vue'),
         props: true,
     },
 
