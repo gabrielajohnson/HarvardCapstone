@@ -1,24 +1,35 @@
 <template>
    <div class="search-bar">
       <input type="text" v-model="input" placeholder="Search fruits..." />
+     
      <div v-show="input" class="item fruit" v-for="fruit in filteredList()" :key="fruit">
-       <p>{{ fruit }}</p>
+
+         <p>{{ fruit }}</p>
      </div>
+
      <div class="item error" v-if="input&&!filteredList().length">
         <p>No results found!</p>
      </div>
    </div>
+
 </template>
 
 <script setup>
    import { ref } from "vue";
+   
    let input = ref("");
+
    const fruits = ["germany", "spain", "switzerland"];
+
+
    function filteredList() {
-     return fruits.filter((fruit) =>
-       fruit.toLowerCase().includes(input.value.toLowerCase())
-     );
+      return fruits.filter((fruit) =>
+      fruit.toLowerCase().includes(input.value.toLowerCase())
+      );
    }
+      
+
+
 </script>
 
 <style>

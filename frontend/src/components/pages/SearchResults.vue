@@ -1,26 +1,49 @@
 <script>
 import axios from "axios";
 import searchBar from '../searchBar.vue'
+import roundDetail from '../roundDetail.vue'
+
 export default {
   components: {
-    searchBar
+    searchBar,
+    roundDetail
   },
   data() {
     return {
       books: [],
       description: "",
       title: "",
+      rounds: [
+        { number: 1, winner: 'Player' },
+        { number: 2, winner: 'Player' },
+        { number: 3, winner: 'Computer' },
+      ]
     };
   },
   async mounted() {
     const response = await axios.get("/api/books/country/" + "germany");
     this.books = response.data;
   },
+  methods:{
+    deleteRound(number) {
+      this.rounds = this.rounds.filter((round) => round.number != number);
+    }
+  }
+
 }
+
 </script>
 
 <template>
-  <searchBar/>
+  <div>
+    <round-detail v-for="round in rounds" 
+        v-on:delete-round='deleteRound($event)' 
+        v-bind:key='round.number'
+        v-bind:number='round.number' 
+        v-bind:winner='round.winner'>
+    </round-detail>
+
+      <searchBar/>
   <div>
       <mediaTabs>
           <mediaTab name="Overview">
@@ -51,8 +74,7 @@ export default {
           </mediaTab>
       </mediaTabs>
   </div>
-
-
+</div>
 </template>
 
 <style>
