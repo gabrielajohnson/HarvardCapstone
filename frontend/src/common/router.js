@@ -15,7 +15,13 @@ const routes = [
     {
         name: 'bookMedia',
         path: '/media/books/:id',
-        component: () => import('@/components/pages/BookResultDetail.vue'),
+        component: () => import('@/components/pages/resultPages/BookResultDetail.vue'),
+        props: true,
+    },
+    {
+        name: 'articleMedia',
+        path: '/media/articles/:id',
+        component: () => import('@/components/pages/resultPages/ArticleResultDetail.vue'),
         props: true,
     },
 

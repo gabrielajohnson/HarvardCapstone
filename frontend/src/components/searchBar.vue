@@ -1,35 +1,57 @@
 <template>
    <div class="search-bar">
-      <input type="text" v-model="input" placeholder="Search fruits..." />
+
+
+      <input type="text" v-model="searchInput" placeholder="Search countries..."/>
      
-     <div v-show="input" class="item fruit" v-for="fruit in filteredList()" :key="fruit">
+      <div v-show="(searchInput && localCountryModal)" class = "country-modal">
+         <div class="item country" v-for="country in filteredList()" :key="country">
 
-         <p>{{ fruit }}</p>
-     </div>
+            <p v-on:click="$emit('search-country', country);closeModal();">{{ country }}</p>
 
-     <div class="item error" v-if="input&&!filteredList().length">
+         </div>
+      </div>
+
+   <div class="item error" v-if="searchInput&&!filteredList().length">
         <p>No results found!</p>
      </div>
    </div>
 
 </template>
 
-<script setup>
-   import { ref } from "vue";
-   
-   let input = ref("");
+<script>
+  import { ref } from "vue";
 
-   const fruits = ["germany", "spain", "switzerland"];
+   export default{
+      data(){
+         return{
+            localCountryModal: this.countryModal,
+            selected: '',
+            searchInput: ref(""),
+            countries: ["germany", "spain", "switzerland"]
+         };
+      },
+      props: ['countryModal'],
+      watch: {
+         selected(newValue){
+            this.$emit('selected-year-changed', newValue);
+         }
+      },
+      methods: {
+         filteredList() {
+            this.localCountryModal = true;
 
-
-   function filteredList() {
-      return fruits.filter((fruit) =>
-      fruit.toLowerCase().includes(input.value.toLowerCase())
-      );
+            return this.countries.filter((country) =>
+            country.toLowerCase().includes(this.searchInput.toLowerCase())
+            );
+         },
+         closeModal(){
+            this.searchInput = ref("");
+         }
+     }
    }
+
       
-
-
 </script>
 
 <style>
@@ -50,6 +72,14 @@ body {
 
 body{
    background-color: rgb(234, 242, 255);
+}
+
+.country-modal{
+   background: rgba(100,100,100,0.5);
+   position: absolute;
+   top: 90px;
+   width: 100%;
+   height: 100%;
 }
 
 .search-bar{
