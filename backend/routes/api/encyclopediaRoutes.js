@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getEncyclopedias, setEncyclopedia, updateEncyclopedia, deleteEncyclopedia } = require('../../controllers/EncyclopediaController')
+const { getEncyclopedias, setEncyclopedia, updateEncyclopedia, deleteEncyclopedia } = require('../../controllers/encyclopediaController')
 
 router.route('/').get(getEncyclopedias).post(setEncyclopedia)
 

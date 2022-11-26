@@ -2,13 +2,29 @@ const asyncHandler = require('express-async-handler')
 const axios = require('axios');
 
 const Article = require('../models/articleModel')
+
 // @desc Get article
+// @route  GET /api/article/:id
+// @access Private
+const getArticle = asyncHandler(async (req, res) => {
+
+	const article = await Article.find({id: req.params.id});
+
+	if(!article){
+		res.status(400)
+		throw new Error('Article not found')
+	}
+	
+	res.status(200).json(article)
+
+})
+
+// @desc Get articles
 // @route  GET /api/article
 // @access Private
 const getArticles = asyncHandler(async (req, res) => {
-	console.log("Get");
-	const article = await Article.find()
-	res.status(200).json(article)
+	const articles = await Article.find({country: req.params.country});
+	res.status(200).json(articles)
 })
 
 // @desc Set article
@@ -104,6 +120,7 @@ const deleteArticle = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
+	getArticle,
 	getArticles,
 	setArticle,
 	updateArticle,

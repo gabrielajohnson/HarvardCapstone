@@ -7,7 +7,6 @@ const Book = require('../models/bookModel')
 // @route  GET /api/book/:id
 // @access Private
 const getBook = asyncHandler(async (req, res) => {
-	console.log("Get 1");
 
 	const book = await Book.find({id: req.params.id});
 
@@ -24,12 +23,7 @@ const getBook = asyncHandler(async (req, res) => {
 // @route  GET /api/book
 // @access Private
 const getBooks = asyncHandler(async (req, res) => {
-	console.log("Get");
-	//console.log(req);
-
 	const books = await Book.find({country: req.params.country});
-	
-	
 	res.status(200).json(books)
 })
 

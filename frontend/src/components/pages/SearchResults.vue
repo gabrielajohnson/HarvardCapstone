@@ -9,14 +9,20 @@ export default {
   data() {
     return {
       books: [],
+      articles: [],
       description: "",
       title: "",
+      countryModal: true
     };
   },
   methods:{
     async searchCountry(country){
-      const response = await axios.get("/api/books/country/" + country);
-      this.books = response.data;
+      const bookResponse = await axios.get("/api/books/country/" + country);
+      
+      const articleResponse = await axios.get("/api/articles/country/" + country);
+
+      this.books = bookResponse.data;
+      this.articles = articleResponse.data;
       this.countryModal = false;
     }
   }
@@ -49,7 +55,18 @@ export default {
             </div>
           </mediaTab>
           <mediaTab name="Articles">
-            <p>Third mediaTab content</p>
+            <div>
+              <router-link
+              v-for="article in articles"
+              :key="article.id"
+              :to="{
+               name: 'articleMedia',
+               params: { id: article.id},
+              }" 
+                >
+            <span class="article">{{ article.headline.main }}</span>
+              </router-link>
+            </div>
           </mediaTab>
           <mediaTab name="Podcasts">
             <p>Fourth mediaTab content</p>
