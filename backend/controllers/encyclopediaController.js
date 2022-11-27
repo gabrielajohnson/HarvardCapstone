@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler')
 const axios = require('axios');
 const { XMLParser, XMLBuilder, XMLValidator} = require("fast-xml-parser");
 
-const Encyclopedia = require('../models/encyclopediaModel')
+const Encyclopedia = require('./models/encyclopediaModel')
 // @desc Get encyclopedia
 // @route  GET /api/encyclopedia
 // @access Private
