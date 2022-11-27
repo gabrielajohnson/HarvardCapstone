@@ -7,25 +7,28 @@ const dotenv = require('dotenv').config()
 const { errorHandler } = require('./middleware/errorMiddleware')
 const path = require('path')
 const port = process.env.PORT || 5000
-//////////NEWWWWW
-
-/////////ENDDDD
 
 
-app.use(express.json())
 
-app.use(express.urlencoded({extended: false}))
+app.use(express.json());
 
-///////NEWWWW
-app.use(cors()) // to allow cross origin requests
-app.use(bodyParser.json()) // to convert the request into JSON
-/*app.get('/', (req, res) => {
-    res.send('Hello World')
-})*/
+app.use(express.urlencoded({extended: false}));
+
+//NEWWWWWWWWWW
+app.use(express.static(process.cwd() + '/frontend/dist'));
+
+app.get('/', (req,res) => {
+  res.sendFile(process.cwd() + '/frontend/dist/index.html');
+});
+
+//ENDDDDDDDDDD
+
+app.use(cors()); // to allow cross origin requests
+app.use(bodyParser.json()); // to convert the request into JSON
+
 
 const connectDB = require("./config/db")
 connectDB()
-///////ENDDDDD
 
 app.use('/api/goals', require('./routes/api/goalRoutes'))
 app.use('/api/books', require('./routes/api/bookRoutes'))
