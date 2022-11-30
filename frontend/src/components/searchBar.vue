@@ -28,7 +28,7 @@
             localCountryModal: this.countryModal,
             selected: '',
             searchInput: ref(""),
-            countries: ["germany", "spain", "switzerland"]
+            countries: ["germany", "spain", "switzerland","afghanistan"]
          };
       },
       props: ['countryModal'],

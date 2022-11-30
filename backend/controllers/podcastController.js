@@ -1,15 +1,31 @@
 const asyncHandler = require('express-async-handler')
 const axios = require('axios');
-
 const Podcast = require('../models/podcastModel')
 const { Client } = require('podcast-api');
+
+
 // @desc Get podcast
-// @route  GET /api/podcast
+// @route  GET /api/podcast/:id
+// @access Private
+const getPodcast = asyncHandler(async (req, res) => {
+
+	const podcast = await Podcast.find({id: req.params.id});
+
+	if(!podcast){
+		res.status(400)
+		throw new Error('Podcast not found')
+	}
+	
+	res.status(200).json(podcast)
+
+})
+
+// @desc Get podcasts
+// @route  GET /api/podcasts
 // @access Private
 const getPodcasts = asyncHandler(async (req, res) => {
-	console.log("Get");
-	const podcast = await Podcast.find()
-	res.status(200).json(podcast)
+	const podcasts = await Podcast.find({country: req.params.country});
+	res.status(200).json(podcasts)
 })
 
 // @desc Set podcast
@@ -123,6 +139,7 @@ const deletePodcast = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
+	getPodcast,
 	getPodcasts,
 	setPodcast,
 	updatePodcast,

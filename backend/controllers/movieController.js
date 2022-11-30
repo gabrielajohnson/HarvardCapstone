@@ -2,13 +2,29 @@ const asyncHandler = require('express-async-handler')
 const axios = require('axios');
 
 const Movie = require('../models/movieModel')
+
 // @desc Get movie
 // @route  GET /api/movie
 // @access Private
-const getMovies = asyncHandler(async (req, res) => {
-	console.log("Get");
-	const movie = await Movie.find()
+const getMovie = asyncHandler(async (req, res) => {
+
+	const movie = await Movie.find({id: req.params.id});
+
+	if(!movie){
+		res.status(400)
+		throw new Error('Movie not found')
+	}
+	
 	res.status(200).json(movie)
+
+})
+
+// @desc Get movies
+// @route  GET /api/movies
+// @access Private
+const getMovies = asyncHandler(async (req, res) => {
+	const movies = await Movie.find({country: req.params.country});
+	res.status(200).json(movies)
 })
 
 // @desc Set movie
@@ -97,6 +113,7 @@ const deleteMovie = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
+	getMovie,
 	getMovies,
 	setMovie,
 	updateMovie,

@@ -1,28 +1,47 @@
 <script>
 import axios from "axios";
 import searchBar from '../searchBar.vue'
+import EncyclopediaResultDetail from './/resultPages/EncyclopediaResultDetail.vue'
 
 export default {
   components: {
     searchBar,
+    EncyclopediaResultDetail
   },
   data() {
     return {
       books: [],
       articles: [],
+      movies: [],
+      podcasts: [],
       description: "",
       title: "",
+      countryChoice: "",
       countryModal: true
     };
   },
+  mounted() {
+    this.countryChoice = localStorage.getItem("storedCountry");
+    this.searchCountry(this.countryChoice);
+  },
   methods:{
     async searchCountry(country){
+      this.countryChoice = country;
+      localStorage.setItem("storedCountry", this.countryChoice);
+
       const bookResponse = await axios.get("/api/books/country/" + country);
       
       const articleResponse = await axios.get("/api/articles/country/" + country);
 
+      const movieResponse = await axios.get("/api/movies/country/" + country);
+
+      const podcastResponse = await axios.get("/api/podcasts/country/" + country);
+
       this.books = bookResponse.data;
       this.articles = articleResponse.data;
+      this.movies = movieResponse.data;
+      this.podcasts = podcastResponse.data;
+
       this.countryModal = false;
     }
   }
@@ -37,10 +56,14 @@ export default {
 
   <div>
       <mediaTabs>
+
           <mediaTab name="Overview">
-            <p>First mediaTab content</p>
+            <EncyclopediaResultDetail v-bind:country="countryChoice"/>
+            
           </mediaTab>
+
           <mediaTab name="Books">
+
             <div>
               <router-link
               v-for="book in books"
@@ -53,8 +76,11 @@ export default {
             <span class="book">{{ book.volumeInfo.title }}</span>
               </router-link>
             </div>
+
           </mediaTab>
+
           <mediaTab name="Articles">
+
             <div>
               <router-link
               v-for="article in articles"
@@ -67,13 +93,43 @@ export default {
             <span class="article">{{ article.headline.main }}</span>
               </router-link>
             </div>
+
           </mediaTab>
+
           <mediaTab name="Podcasts">
-            <p>Fourth mediaTab content</p>
+
+            <div>
+              <router-link
+              v-for="podcast in podcasts"
+              :key="podcast.id"
+              :to="{
+               name: 'podcastMedia',
+               params: { id: podcast.id},
+              }" 
+                >
+            <span class="podcast">{{ podcast.title_original }}</span>
+              </router-link>
+            </div>
+
           </mediaTab>
+
           <mediaTab name="Movies">
-            <p>Fifth mediaTab content</p>
+
+            <div>
+              <router-link
+              v-for="movie in movies"
+              :key="movie.id"
+              :to="{
+               name: 'movieMedia',
+               params: { id: movie.id},
+              }" 
+                >
+            <span class="movie">{{ movie.title }}</span>
+              </router-link>
+            </div>
+
           </mediaTab>
+
       </mediaTabs>
   </div>
 </template>

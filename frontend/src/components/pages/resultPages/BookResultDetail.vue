@@ -25,7 +25,8 @@ export default {
     }
   },
   async mounted() {
-    const response = await axios.get("/api/books/"+this.id);
+
+    const response = await axios.get("/api/books/" + this.id);
     this.book = await response.data;
     this.country = await this.book[0].country;
     this.selfLink = await this.book[0].selfLink;

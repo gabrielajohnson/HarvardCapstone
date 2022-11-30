@@ -24,6 +24,18 @@ const routes = [
         component: () => import('@/components/pages/resultPages/ArticleResultDetail.vue'),
         props: true,
     },
+    {
+        name: 'movieMedia',
+        path: '/media/movies/:id',
+        component: () => import('@/components/pages/resultPages/MovieResultDetail.vue'),
+        props: true,
+    },
+    {
+        name: 'podcastMedia',
+        path: '/media/podcasts/:id',
+        component: () => import('@/components/pages/resultPages/PodcastResultDetail.vue'),
+        props: true,
+    },
 
 ];
 
