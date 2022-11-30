@@ -21,13 +21,13 @@ export default {
     };
   },
   mounted() {
-    this.countryChoice = localStorage.getItem("storedCountry");
+    this.countryChoice = sessionStorage.getItem("storedCountry");
     this.searchCountry(this.countryChoice);
   },
   methods:{
     async searchCountry(country){
       this.countryChoice = country;
-      localStorage.setItem("storedCountry", this.countryChoice);
+      sessionStorage.setItem("storedCountry", this.countryChoice);
 
       const bookResponse = await axios.get("/api/books/country/" + country);
       
