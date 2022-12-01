@@ -1,12 +1,16 @@
 const path = require('path')
 const express = require('express');
-const app = express()
 const colors = require('colors');
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv').config()
 const { errorHandler } = require('./middleware/errorMiddleware');
+const connectDB = require("./config/db")
 const port = process.env.PORT || 5000
+
+connectDB()
+
+const app = express()
 
 app.use(express.json());
 
@@ -15,10 +19,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors()); // to allow cross origin requests
 app.use(bodyParser.json()); // to convert the request into JSON
 
-//comment
-//comment
-const connectDB = require("./config/db")
-connectDB()
 
 app.use('/api/goals', require('./routes/api/goalRoutes'))
 app.use('/api/books', require('./routes/api/bookRoutes'))

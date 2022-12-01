@@ -1,8 +1,9 @@
-const asyncHandler = require('express-async-handler')
+const asyncHandler = require('express-async-handler');
 const axios = require('axios');
+const Encyclopedia = require('../models/encyclopediaModel');
+
 const { XMLParser, XMLBuilder, XMLValidator} = require("fast-xml-parser");
 
-const Encyclopedia = require('../models/encyclopediaModel')
 
 
 // @desc Get encyclopedia
