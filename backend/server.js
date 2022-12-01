@@ -16,6 +16,7 @@ app.use(cors()); // to allow cross origin requests
 app.use(bodyParser.json()); // to convert the request into JSON
 
 //comment
+//comment
 const connectDB = require("./config/db")
 connectDB()
 
