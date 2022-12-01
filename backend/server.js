@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(cors()); // to allow cross origin requests
 app.use(bodyParser.json()); // to convert the request into JSON
-
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api/goals', require('./routes/api/goalRoutes'))
 app.use('/api/books', require('./routes/api/bookRoutes'))
@@ -30,13 +30,18 @@ app.use('/api/encyclopedias', require('./routes/api/encyclopediaRoutes'))
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {
+
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-  app.get('*', (req, res) =>
+  app.get('/*', (req, res) => {
+      res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'))
+  })
+
+  /*app.get('*', (req, res) =>
     res.sendFile(
       path.resolve(__dirname, '../', 'frontend', 'dist', 'index.html')
     )
-  );
+  );*/
 } else {
   app.get('/', (req, res) => res.send('Please set to production'));
 }
