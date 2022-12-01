@@ -15,7 +15,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors()); // to allow cross origin requests
 app.use(bodyParser.json()); // to convert the request into JSON
 
-
+//comment
 const connectDB = require("./config/db")
 connectDB()
 
