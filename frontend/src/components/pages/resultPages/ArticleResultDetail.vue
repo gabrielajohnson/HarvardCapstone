@@ -47,20 +47,19 @@ export default {
 <template>
   <div>
 
-    <p>Title: {{ headlineMain }}</p>
+    <h2>{{ headlineMain }}</h2>
     <p>Date: {{ pub_date }}</p>
-    <p>{{ country }}</p>
-    <p>Url: {{ web_url }}</p>
-    <p>Snippet: {{ snippet }}</p>
-    <p>Abstract: {{ abstract }}</p>
-    <p>Lead Paragraph: {{ lead_paragraph }}</p>
     <p>Source: {{ source }}</p>
+    <a :href="web_url" class="button">View Article</a>
+    <p>Snippet: {{ snippet }}</p>
+   <!--<p>Abstract: {{ abstract }}</p>-->
+    <p>Lead Paragraph: {{ lead_paragraph }}</p>
     <p>Document Type: {{ document_type }}</p>
     <p>Type of Material: {{ type_of_material }}</p>
-    <p>Multimedia Original: {{ multimediaOriginal }}</p>
-    <p>Multimedia URL:  {{ multimediaUrl }}</p>
-    <p>Multimedia Date:  {{ multimediaPubDate }}</p>
-    <p> Multimedia Organization: {{ multimediaOrganization }}</p>
+    <p v-if="typeof multimediaOriginal != 'function'">Multimedia Original: {{ multimediaOriginal }}</p>
+    <p v-if="typeof multimediaUrl != 'function'">Multimedia URL:  {{ multimediaUrl }}</p>
+    <p v-if="typeof multimediaPubDate != 'function'">Multimedia Date:  {{ multimediaPubDate }}</p>
+    <p v-if="typeof multimediaOrganization != 'function'"> Multimedia Organization: {{ multimediaOrganization }}</p>
 
 
   </div>

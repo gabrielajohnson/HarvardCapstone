@@ -55,6 +55,11 @@ export default {
     this.podcast_thumbnail = await this.podcast[0].podcast.thumbnail;
     this.podcast_genre_ids = await this.podcast[0].podcast.genre_ids;
 
+    var desc_Highlighted = document.getElementById('descHighlighted');
+    desc_Highlighted.innerHTML = this.description_highlighted;
+
+    var desc_Original = document.getElementById('descOriginal');
+    desc_Original.innerHTML = this.description_original;
   },
 }
 
@@ -62,12 +67,14 @@ export default {
 
 <template>
   <div>
-    <p>{{ audio }}</p>
+    <h2>{{ title_original }}</h2>
+    <!--<p>{{ title_highlighted }}</p>-->
+    <h3>Podcast: {{ podcast_title_highlighted }}</h3>
+    <!--<p>{{ podcast_title_original }}</p>-->
+    <a :href="audio" class="button" target="_blank">View Podcast</a>
     <p>{{ audio_length_sec }}</p>
-    <p>{{ description_highlighted }}</p>
-    <p>{{ description_original }}</p>
-    <p>{{ title_original }}</p>
-    <p>{{ title_highlighted }}</p>
+    <p id="descHighlighted"></p>
+    <p id="descOriginal">{{ description_original }}</p>
     <p>{{ image }}</p>
     <p>{{ thumbnail }}</p>
     <p>{{ itunes_id }}</p>
@@ -76,8 +83,6 @@ export default {
     <p>{{ link }}</p>
     <p>{{ podcast_listennotes_url }}</p>
     <p>{{ podcast_id }}</p>
-    <p>{{ podcast_title_highlighted }}</p>
-    <p>{{ podcast_title_original }}</p>
     <p>{{ podcast_publisher_original }}</p>
     <p>{{ podcast_image }}</p>
     <p>{{ podcast_thumbnail }}</p>

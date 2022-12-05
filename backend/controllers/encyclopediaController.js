@@ -4,20 +4,17 @@ const Encyclopedia = require('../models/encyclopediaModel');
 
 const { XMLParser, XMLBuilder, XMLValidator} = require("fast-xml-parser");
 
-
-
 // @desc Get encyclopedia
 // @route  GET /api/encyclopedia
 // @access Private
 const getEncyclopedia = asyncHandler(async (req, res) => {
-
   const encyclopedia = await Encyclopedia.find({country: req.params.country});
 
   if(!encyclopedia){
     res.status(400)
     throw new Error('Encyclopedia not found')
   }
-  
+
   res.status(200).json(encyclopedia)
 
 })
@@ -35,8 +32,24 @@ const getEncyclopedias = asyncHandler(async (req, res) => {
 // @access Private
 const setEncyclopedia = asyncHandler(async (req, res) => {
 
-  const country = 'The Bahamas';
-  const pageId = "356362";
+  /*for(let j = 0; j < country_list.length; j++){
+    console.log("{");
+
+    console.log("articleId: " + country_list[j].articleId);
+    console.log("articleTypeId: " + country_list[j].articleTypeId);
+    console.log("title: " + country_list[j].title);
+    console.log("lastUpdated: " + country_list[j].lastUpdated);
+
+    console.log("}");
+  }*/
+
+
+  let j = 0;
+
+  setInterval(function(){ 
+
+  const country = country_list[j].title.toLowerCase();
+  const pageId = country_list[j].articleId;
 
   const getData = async () => {
     
@@ -54,7 +67,7 @@ const setEncyclopedia = asyncHandler(async (req, res) => {
       }).then(response => {
         res.status(200);
         //res.send(response.data);
-        console.log("articles", response.data);
+        //console.log("articles", response.data);
       })
       .catch(error => {
         console.log(error);
@@ -83,12 +96,12 @@ const setEncyclopedia = asyncHandler(async (req, res) => {
           const paragraph = data.request.path;
           const regex = /[\d]+/g;
           const foundId = paragraph.match(regex);
-          console.log(foundId[0]);
+          //console.log(foundId[0]);
 
           try{
             const encyclopedia = Encyclopedia.create({
               country: country,
-              id: foundId[0],
+              id: pageId,
               url: data.request.path,
               overview: data.data
           })
@@ -107,6 +120,13 @@ const setEncyclopedia = asyncHandler(async (req, res) => {
 
 
         getData();
+
+      if(j < country_list.length){
+          j++;
+      }
+
+
+  }, 7000);
 
 
 })

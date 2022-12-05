@@ -14,14 +14,16 @@ const articleSchema = mongoose.Schema({
 	headline: {
 		main: {type: String},
 	},
-	multimedia: {
+	/*multimedia: {
 		url: {type: String},
 		pub_date: {type: String},
 		byline: {
 			original: {type: String},
 			organization: {type: String},
 		},
-	},
+	},*/
+	multimedia: {},
+	byline: {}
 },
 {
 	timestamps: true	

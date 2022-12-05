@@ -4,8 +4,11 @@ const bookSchema = mongoose.Schema({
 	country: {type: String},
 	id: {type: String},
 	selfLink: {type: String},
-	previewLink: {type: String},
-	volumeInfo: {
+	volumeInfo: {},
+	layerInfo: {},
+	saleInfo: {},
+	accessInfo: {}
+	/*volumeInfo: {
 		title: {type: String},
 		subtitle: {type: String},
 		authors: [{type:[String]}],
@@ -13,9 +16,11 @@ const bookSchema = mongoose.Schema({
 		publishedDate: {type: String},
 		description: {type: String},
 		pageCount: {type: String},
-		imageLinks: {
-			thumbnail: {type: String}
-		} 
+		imageLinks: {}, 
+		language: {type: String},
+		previewLink: {type: String},
+		infoLink: {type: String},
+		canonicalVolumeLink: {type: String},
 	},
 	saleInfo: {
 		listPrice: {},
@@ -27,7 +32,7 @@ const bookSchema = mongoose.Schema({
 			isAvailable: {type: String},
 			ascTokenLink: {type: String},
 		},
-	}
+	}*/
 },
 {
 	timestamps: true	

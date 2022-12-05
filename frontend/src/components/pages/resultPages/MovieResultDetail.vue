@@ -18,8 +18,8 @@ export default {
       title: String,
       video: Number,
       vote_average: Number,
-      vote_count: Number
-
+      vote_count: Number,
+      genres:[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]
     }
   },
   async mounted() {
@@ -46,22 +46,28 @@ export default {
 </script>
 
 <template>
-  <div>
-    <p>{{ title }}</p>
-    <p>{{ adult }}</p>
-    <a v-bind:href="'https://www.themoviedb.org/movie/'+ this.id" target="_blank">View Movie</a>
-    <p>{{ country }}</p>
-    <p>{{ backdrop_path }}</p>
-    <p>{{ genre_ids }}</p>
-    <p>{{ original_language }}</p>
+  <div class = "movieDetail">
+    <h2>{{ title }}</h2>
+    <p>{{ release_date }}</p>
+    <p v-if="adult">This is an <b>adult</b> film</p>
+    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + backdrop_path"/>
+    
+    <p>Rating: {{ vote_average }} out of 10</p>
+    <p>Vote Count: {{ vote_count }}</p>
+    
+    <a v-bind:href="'https://www.themoviedb.org/movie/'+ this.id" target="_blank" class="button">View Movie</a>
+    
+    <p>
+    <span v-for="genre in genre_ids" :key="genre.id">
+      {{ genres.find(({ id }) => id === genre).name }} 
+    </span>
+    </p>
+    <!--<p>{{ original_language }}</p>-->
     <p>{{ original_title }}</p>
     <p>{{ overview }}</p>
     <p>{{ popularity }}</p>
-    <p>{{ poster_path }}</p>
-    <p>{{ release_date }}</p>
+    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2/'+ poster_path"/>
     <p>{{ video }}</p>
-    <p>{{ vote_average }}</p>
-    <p>{{ vote_count  }}</p>
 
   </div>
 </template>

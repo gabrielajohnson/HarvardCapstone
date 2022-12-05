@@ -14,7 +14,11 @@ export default {
       publishedDate: String,
       description: String,
       pageCount: String,
-      imageLinks: Object,
+      imageLinks: {},
+      language: String,
+      previewLink: String,
+      infoLink: String,
+      canonicalVolumeLink: String,
       listPriceAmount: Number,
       listPriceCurrencyCode: String,
       retailPriceAmount: Number,
@@ -37,12 +41,21 @@ export default {
     this.publishedDate = await this.book[0].volumeInfo.publishedDate;
     this.description = await this.book[0].volumeInfo.description;
     this.pageCount = await this.book[0].volumeInfo.pageCount;
-    this.imageLinks = await this.book[0].volumeInfo.imageLinks.thumbnail,
-    this.listPriceAmount = await this.book[0].saleInfo.listPrice.amount;
-    this.listPriceCurrencyCode = await this.book[0].saleInfo.listPrice.currencyCode;
-    this.retailPriceAmount = await this.book[0].saleInfo.retailPrice.amount;
-    this.retailPriceCurrencyCode = await this.book[0].saleInfo.retailPrice.currencyCode;
-    this.buyLink = await this.book[0].saleInfo.buyLink;
+    this.imageLinks = await this.book[0].volumeInfo.imageLinks;
+
+
+    
+    this.language = await this.book[0].volumeInfo.language;
+    this.previewLink = await this.book[0].volumeInfo.previewLink;
+    this.infoLink = await this.book[0].volumeInfo.infoLink;
+    this.canonicalVolumeLink = await this.book[0].volumeInfo.canonicalVolumeLink;
+
+
+    //this.listPriceAmount = await this.book[0].saleInfo.listPrice.amount;
+    //this.listPriceCurrencyCode = await this.book[0].saleInfo.listPrice.currencyCode;
+    //this.retailPriceAmount = await this.book[0].saleInfo.retailPrice.amount;
+    //this.retailPriceCurrencyCode = await this.book[0].saleInfo.retailPrice.currencyCode;
+    //this.buyLink = await this.book[0].saleInfo.buyLink;
     this.pdf = await this.book[0].accessInfo.pdf.isAvailable;
   },
 }
@@ -51,24 +64,32 @@ export default {
 
 <template>
   <div>
-    <p>{{ title }}</p>
-    <p>{{ country }}</p>
-    <p>{{ selfLink }}</p>
+    <h2>{{ title }}</h2>
     <p>{{ subtitle }}</p>
-    <ul v-for="author in authors" :key="author">
-      <li>{{ author }}</li>
-    </ul>
-    <p>{{ publisher }}</p>
-    <p>{{ publishedDate }}</p>
+    <a :href="previewLink" class="button" target="_blank">View Book</a>
+
+    <div v-if="authors.length == 1">
+      <p><b>Author: </b><span>{{ authors[0] }}</span></p>
+    </div>
+    <div v-else>
+      <p><b>Authors</b></p>
+      <ul v-for="author in authors" :key="author">
+        <li>{{ author }}</li>
+      </ul>
+    </div>
+
+    <p><b>Published </b> {{ publisher }}</p>
+    <p><b>Published Date </b> {{ publishedDate }}</p>
     <p>{{ description }}</p>
-    <p>{{ pageCount }}</p>
+    <p v-if="typeof pageCount != 'function'">{{ pageCount }}</p>
+    <img :src="imageLinks.thumbnail" />
     <p>Image {{ imageLinks }}</p>
-    <p>List Price: {{ listPriceAmount }}</p>
-    <p>{{ listPriceCurrencyCode }}</p>
-    <p>{{ retailPriceAmount }}</p>
-    <p>{{ retailPriceCurrencyCode }}</p>
-    <p>Buy Link: {{ buyLink }}</p>
-    <p>{{ pdf }}</p>
+    <p v-if="typeof listPriceAmount != 'function'">List Price: {{ listPriceAmount }}</p>
+    <p v-if="typeof listPriceCurrencyCode != 'function'">{{ listPriceCurrencyCode }}</p>
+    <p v-if="typeof retailPriceAmount != 'function'">Retail Price: {{ retailPriceAmount }}</p>
+    <p v-if="typeof retailPriceCurrencyCode != 'function'">{{ retailPriceCurrencyCode }}</p>
+    <p v-if="typeof buyLink != 'function'">Buy Link: {{ book.saleInfo.buyLink }}</p>
+    <p v-if="typeof pdf != 'function'">{{ pdf }}</p>
 
   </div>
 </template>

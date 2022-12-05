@@ -34,11 +34,13 @@ const getBooks = asyncHandler(async (req, res) => {
 // @access Private
 const setBook = asyncHandler(async (req, res) => {
 
-	let j = 0;
+  let j = 0;
 
-	setInterval(function(){ 
+  setInterval(function(){ 
 
   const country = country_list[j].toLowerCase();
+
+	//var country = "spain";
 
   let url = `https://www.googleapis.com/books/v1/volumes?q=${country}`;
 
@@ -52,8 +54,11 @@ const setBook = asyncHandler(async (req, res) => {
 							"country": country,
 							"id": response.data.items[i].id, 
 							"selfLink": response.data.items[i].selfLink, 
-							"previewLink": response.data.items[i].previewLink,
-							"volumeInfo": {
+							"volumeInfo": response.data.items[i].volumeInfo,
+							"layerInfo": response.data.items[i].layerInfo,
+							"saleInfo": response.data.items[i].saleInfo,
+							"accessInfo": response.data.items[i].accessInfo,
+							/*"volumeInfo": {
 								"title": response.data.items[i].volumeInfo.title,
 								"subtitle": response.data.items[i].volumeInfo.subtitle,
 								"authors": response.data.items[i].volumeInfo.authors,
@@ -61,9 +66,11 @@ const setBook = asyncHandler(async (req, res) => {
 								"publishedDate": response.data.items[i].volumeInfo.publishedDate,
 								"description": response.data.items[i].volumeInfo.description,
 								"pageCount": response.data.items[i].volumeInfo.pageCount,
-								"imageLinks": {
-									"thumbnail": response.data.items[i].volumeInfo.imageLinks.thumbnail,
-								} 
+								"imageLinks": response.data.items[i].volumeInfo.imageLinks,
+								"language": response.data.items[i].volumeInfo.language,
+								"previewLink": response.data.items[i].volumeInfo.previewLink,
+								"infoLink": response.data.items[i].volumeInfo.infoLink,
+								"canonicalVolumeLink": response.data.items[i].volumeInfo.canonicalVolumeLink,
 							},
 							"saleInfo": {
 								"listPrice": response.data.items[i].saleInfo.listPrice,
@@ -75,7 +82,7 @@ const setBook = asyncHandler(async (req, res) => {
 									"isAvailable": response.data.items[i].accessInfo.pdf.isAvailable,
 									"ascTokenLink": response.data.items[i].accessInfo.pdf.ascTokenLink,
 								},
-							}
+							}*/
 						})
 
 						res.status(200).json(book);
@@ -92,8 +99,8 @@ const setBook = asyncHandler(async (req, res) => {
 	};
 
 	sendGetRequest();
-
-		if(j < country_list.length){
+	
+	if(j < country_list.length){
 		j++;
 	}
 

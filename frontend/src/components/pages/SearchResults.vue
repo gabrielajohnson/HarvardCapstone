@@ -26,16 +26,17 @@ export default {
   },
   methods:{
     async searchCountry(country){
-      this.countryChoice = country;
+      this.countryChoice = country.toLowerCase();
+      
       sessionStorage.setItem("storedCountry", this.countryChoice);
 
-      const bookResponse = await axios.get("/api/books/country/" + country);
+      const bookResponse = await axios.get("/api/books/country/" + this.countryChoice);
       
-      const articleResponse = await axios.get("/api/articles/country/" + country);
+      const articleResponse = await axios.get("/api/articles/country/" + this.countryChoice);
 
-      const movieResponse = await axios.get("/api/movies/country/" + country);
+      const movieResponse = await axios.get("/api/movies/country/" + this.countryChoice);
 
-      const podcastResponse = await axios.get("/api/podcasts/country/" + country);
+      const podcastResponse = await axios.get("/api/podcasts/country/" + this.countryChoice);
 
       this.books = bookResponse.data;
       this.articles = articleResponse.data;
@@ -54,17 +55,19 @@ export default {
 
   <searchBar v-bind:countryModal="countryModal" v-on:search-country='searchCountry($event)'/>
 
-  <div>
+  <div class = "search-results">
       <mediaTabs>
-
+          <div class="tab-anchor" id="overview"></div>
           <mediaTab name="Overview">
-            <EncyclopediaResultDetail v-bind:country="countryChoice"/>
+            <div class="results-list">
+              <EncyclopediaResultDetail v-bind:country="countryChoice"/>
+            </div>
             
           </mediaTab>
-
+              <div class="tab-anchor" id="books"></div>
           <mediaTab name="Books">
 
-            <div>
+            <div class="results-list">
               <router-link
               v-for="book in books"
               :key="book.id"
@@ -73,15 +76,15 @@ export default {
                params: { id: book.id},
               }" 
                 >
-            <span class="book">{{ book.volumeInfo.title }}</span>
+            <span class="list-row">{{ book.volumeInfo.title }}</span>
               </router-link>
             </div>
 
           </mediaTab>
-
+              <div class="tab-anchor" id="articles"></div>
           <mediaTab name="Articles">
 
-            <div>
+            <div class="results-list">
               <router-link
               v-for="article in articles"
               :key="article.id"
@@ -90,15 +93,15 @@ export default {
                params: { id: article.id},
               }" 
                 >
-            <span class="article">{{ article.headline.main }}</span>
+            <span class="list-row">{{ article.headline.main }}</span>
               </router-link>
             </div>
 
           </mediaTab>
-
+              <div class="tab-anchor" id="podcasts"></div>
           <mediaTab name="Podcasts">
 
-            <div>
+            <div class="results-list">
               <router-link
               v-for="podcast in podcasts"
               :key="podcast.id"
@@ -107,15 +110,15 @@ export default {
                params: { id: podcast.id},
               }" 
                 >
-            <span class="podcast">{{ podcast.title_original }}</span>
+            <span class="list-row">{{ podcast.title_original }}</span>
               </router-link>
             </div>
 
           </mediaTab>
-
+              <div class="tab-anchor" id="movies"></div>
           <mediaTab name="Movies">
 
-            <div>
+            <div class="results-list">
               <router-link
               v-for="movie in movies"
               :key="movie.id"
@@ -124,7 +127,7 @@ export default {
                params: { id: movie.id},
               }" 
                 >
-            <span class="movie">{{ movie.title }}</span>
+            <span class="list-row">{{ movie.title }}</span>
               </router-link>
             </div>
 
@@ -135,19 +138,6 @@ export default {
 </template>
 
 <style>
-@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
-
-.tabs-component-tabs{
-  display: flex;
-  justify-content: space-around;
-}
-
-.tabs-component-tab {
-    background: white;
-    padding: 10px;
-    border-radius: 30px;
-    width: 150px;
-    text-align: center;
-}
+/*@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";*/
 
 </style>
