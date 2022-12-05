@@ -8,7 +8,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "frontend/dist/**",
+      "src": "frontend/src/main.js",
       "use": "@vercel/static",
       "config": { "includeFiles": ["frontend/dist/**"] }
     }
@@ -22,10 +22,6 @@
       "src": "/",
       "dest": "frontend/dist/index.html"
     },
-    {
-      "src": "/(.+)",
-      "dest": "ui/build/$1"
-    }
   ]
 }
 
