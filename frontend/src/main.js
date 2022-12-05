@@ -1,11 +1,3 @@
-/*import { createApp } from 'vue'
-import router from '@/common/router.js';
-import App from './App.vue'
-
-
-createApp(App).mount('#app')*/
-
-
 import { createApp } from 'vue'
 import router from '@/common/router.js';
 import {Tabs, Tab} from 'vue3-tabs-component';
