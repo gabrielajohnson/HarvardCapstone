@@ -2,7 +2,7 @@
    <div class="search-bar">
 
 
-      <input type="text" v-model="searchInput" placeholder="Search countries..."/>
+      <input type="text" id="countryInput" v-model="searchInput" placeholder="Search countries..."/>
      
       <div v-show="(searchInput && localCountryModal)" class = "country-modal">
 
@@ -39,6 +39,10 @@
             this.$emit('selected-year-changed', newValue);
          }
       },
+      /*mounted () {
+         const input = document.getElementById('countryInput');
+         input.focus();
+      },*/
       methods: {
          filteredList() {
             this.localCountryModal = true;
@@ -59,9 +63,6 @@
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-body{
-   background-color: rgb(234, 242, 255);
-}
 
 .country-modal{
    background: rgb(178 178 178);

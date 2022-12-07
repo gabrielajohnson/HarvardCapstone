@@ -14,14 +14,17 @@ a{
 body{
   height: 100%;
   margin: 0;
+  background: radial-gradient(white, #41d29e00);
 }
 
 /*MENU*/
 nav{
-  background:lightgrey;
+  background: linear-gradient(45deg, #08ae86, #46e1a6);
   text-align: left;
   display: flex;
   justify-content: space-between;
+  color: white;
+  box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
 }
 
 nav h3{
@@ -36,6 +39,7 @@ nav ul{
 
 nav ul li{
   padding: 0px 10px;
+  color: white;
 }
 
 /*MENU END*/
@@ -60,7 +64,7 @@ nav ul li{
   font-size: 20px;
   margin: 0;
   font-weight: normal;
-  padding:10px;
+  padding:10px 0px;
 }
 
 .input {
@@ -139,17 +143,31 @@ tabs-component{
 }
 
 .tabs-component-tab {
-    background: white;
+    background: #3dcd9b;
     padding: 10px;
     border-radius: 30px;
     width: 150px;
     text-align: center;
+    box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+}
+
+.tabs-component-tab:hover{
+  background: radial-gradient(white,#46cc9c21)
+}
+
+.tabs-component-tab:hover a{
+  color: #3dcd9b;
+}
+
+.tabs-component-tab a{
+  color: white;
 }
 
 .results-list{
   position: relative;
   overflow-y: scroll;
   height: calc(100% - 200px);
+  padding: 0px 20px;
 }
 
 .tabs-component-panel{
@@ -170,11 +188,11 @@ tabs-component{
   background: rgba(255,255,255,0.5);
   margin-bottom: 10px;
   color: black;
+  border-bottom: 1px solid lightgrey;
 }
 
 .list-row:hover{
-  background: #a083bd;
-  color: white;
+  background: #46cc9c82;
 }
 
 .button{

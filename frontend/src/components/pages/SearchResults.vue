@@ -68,6 +68,7 @@ export default {
           <mediaTab name="Books">
 
             <div class="results-list">
+              <h4>Books</h4>
               <router-link
               v-for="book in books"
               :key="book.id"
@@ -79,12 +80,13 @@ export default {
             <span class="list-row">{{ book.volumeInfo.title }}</span>
               </router-link>
             </div>
-
+            <small>*From Google Books</small>
           </mediaTab>
               <div class="tab-anchor" id="articles"></div>
           <mediaTab name="Articles">
-
+            
             <div class="results-list">
+              <h4>Articles</h4>
               <router-link
               v-for="article in articles"
               :key="article.id"
@@ -96,12 +98,12 @@ export default {
             <span class="list-row">{{ article.headline.main }}</span>
               </router-link>
             </div>
-
+              <small>*From NY Times</small>
           </mediaTab>
               <div class="tab-anchor" id="podcasts"></div>
           <mediaTab name="Podcasts">
-
             <div class="results-list">
+              <h4>Podcasts</h4>
               <router-link
               v-for="podcast in podcasts"
               :key="podcast.id"
@@ -113,12 +115,13 @@ export default {
             <span class="list-row">{{ podcast.title_original }}</span>
               </router-link>
             </div>
-
+              <small>*From Listen Notes</small>
           </mediaTab>
               <div class="tab-anchor" id="movies"></div>
           <mediaTab name="Movies">
 
             <div class="results-list">
+              <h4>Movies</h4>
               <router-link
               v-for="movie in movies"
               :key="movie.id"
@@ -130,7 +133,7 @@ export default {
             <span class="list-row">{{ movie.title }}</span>
               </router-link>
             </div>
-
+            <small>*From The Movie Database</small>
           </mediaTab>
 
       </mediaTabs>

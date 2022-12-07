@@ -13,14 +13,14 @@
       "config": { "includeFiles": ["../frontend/dist/**"] }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "./routes/api/(.*)",
-      "dest": "./server.js"
+      "source": "./routes/api/(.*)",
+      "destination": "./server.js"
     },
     {
-      "src": "../frontend/src/main.js",
-      "dest": "../frontend/dist/index.html"
+      "source": "../frontend/src/main.js",
+      "destination": "../frontend/dist/index.html"
     },
   ]
 }

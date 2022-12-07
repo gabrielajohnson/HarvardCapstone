@@ -1,16 +1,35 @@
 <script>
+
 export default {
+  components: {
+  },
+  data() {
+    return {
+      countries:["Algeria","Germany","France","India","Brazil"],
+      country: ''
+    };
+  },
+  mounted() {
+  },
+  methods:{
+
+  }
 
 }
+
 </script>
 
 <template>
-<h1>HomePage</h1>
-</template>
+  <h2>Prefiltered Countries</h2>
 
-<style>
-.greeting {
-  color: red;
-  font-weight: bold;
-}
-</style>
+  <router-link
+    v-for="country in countries"
+      :key="country.id" 
+      to="/search"
+      v-bind:homeCountry='country'
+    >
+      <span class="list-row">{{ country }}</span>
+  </router-link>
+
+
+</template>

@@ -35,7 +35,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div v-if="typeof title != 'function'">
     <h2>{{ title }}</h2>
     <h3>Overview</h3>
     <p>{{ overview }}</p>

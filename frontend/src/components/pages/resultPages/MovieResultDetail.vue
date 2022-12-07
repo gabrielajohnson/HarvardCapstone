@@ -50,7 +50,9 @@ export default {
     <h2>{{ title }}</h2>
     <p>{{ release_date }}</p>
     <p v-if="adult">This is an <b>adult</b> film</p>
-    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + backdrop_path"/>
+    <img v-if="backdrop_path != null" :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + backdrop_path"/>
+
+    <img v-if="backdrop_path == null && poster_path != null" :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2/'+ poster_path"/>
     
     <p>Rating: {{ vote_average }} out of 10</p>
     <p>Vote Count: {{ vote_count }}</p>
@@ -66,7 +68,6 @@ export default {
     <p>{{ original_title }}</p>
     <p>{{ overview }}</p>
     <p>{{ popularity }}</p>
-    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2/'+ poster_path"/>
     <p>{{ video }}</p>
 
   </div>
