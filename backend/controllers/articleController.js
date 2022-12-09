@@ -1,9 +1,6 @@
-const asyncHandler = require('express-async-handler')
+const asyncHandler = require('express-async-handler');
 const axios = require('axios');
-
-
-
-const Article = require('../models/articleModel')
+const Article = require('../models/articleModel');
 
 // @desc Get article
 // @route  GET /api/article/:id
