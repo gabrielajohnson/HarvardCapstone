@@ -39,14 +39,7 @@ if (process.env.NODE_ENV === 'production') {
       res.sendFile(path.join(__dirname + '/public/index.html'));
   })
 
-  /*app.get('*', (req, res) =>
-    res.sendFile(
-      path.resolve(__dirname, '../', 'frontend', 'dist', 'index.html')
-    )
-  );*/
-/*} else {
-  app.get('/', (req, res) => res.send('Please set to production'));
-}*/
+}
 
 
 app.use(errorHandler)
