@@ -18,13 +18,6 @@ const getEncyclopedia = asyncHandler(async (req, res) => {
 
 })
 
-// @desc Get encyclopedia
-// @route  GET /api/encyclopedia
-// @access Private
-const getEncyclopedias = asyncHandler(async (req, res) => {
-	const Encyclopedias = await Encyclopedia.find({country: req.params.country});
-	res.status(200).json(encyclopedia)
-})
 
 // @desc Set encyclopedia
 // @route  POST /api/encyclopedia
@@ -166,7 +159,6 @@ const deleteEncyclopedia = asyncHandler(async (req, res) => {
 
 module.exports = {
   getEncyclopedia,
-	getEncyclopedias,
 	setEncyclopedia,
 	updateEncyclopedia,
 	deleteEncyclopedia
