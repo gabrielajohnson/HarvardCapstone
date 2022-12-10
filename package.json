@@ -10,7 +10,7 @@
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js"
   },
-  "author": "Gabby",
+  "author": "Gabby", 
   "license": "MIT",
   "dependencies": {
     "@vitejs/plugin-vue": "^3.2.0",
