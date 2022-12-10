@@ -1,12 +1,12 @@
 const path = require('path')
 const express = require('express');
 const colors = require('colors');
-const cors = require('cors')
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv').config()
 const { errorHandler } = require('./middleware/errorMiddleware');
-const connectDB = require("./config/db")
-const port = process.env.PORT || 5000
+const connectDB = require("./config/db");
+const port = process.env.PORT || 5000;
 
 connectDB()
 
@@ -25,7 +25,7 @@ app.use('/api/books', require('./routes/api/bookRoutes'))
 app.use('/api/podcasts', require('./routes/api/podcastRoutes'))
 app.use('/api/articles', require('./routes/api/articleRoutes'))
 app.use('/api/movies', require('./routes/api/movieRoutes'))
-app.use('/api/encyclopedias', require('./routes/api/encyclopediaRoutes'))
+//app.use('/api/encyclopedias', require('./routes/api/encyclopediaRoutes'))
 
 
 // Handle production
