@@ -2,6 +2,9 @@ const asyncHandler = require('express-async-handler');
 const axios = require('axios');
 const Article = require('../models/articleModel');
 
+//var country_list_media = ["Zambia","Antigua and Barbuda","Bosnia and Herzegovina","Côte d'Ivoire","Cabo Verde","Canada","Central African Republic","Comoros","Czechia","Democratic Republic of the Congo","Eritrea","Eswatini","Guinea-Bissau","Holy See","Kiribati","Kyrgyzstan","Marshall Islands","Micronesia","Myanmar","Nauru","North Korea","North Macedonia","Palau","Palestine State","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Sao Tome and Principe","Solomon Islands","Somalia","South Sudan","Timor-Leste","Trinidad and Tobago","Tuvalu","United States of America","Vanuatu"];
+var country_list_media = ["vanuatu","tuvalu"];
+
 // @desc Get article
 // @route  GET /api/article/:id
 // @access Private
@@ -35,9 +38,10 @@ const setArticle = asyncHandler(async (req, res) => {
 
 	setInterval(function(){ 
 
-  const country = country_list[j].toLowerCase();
+  const country = country_list_media[j].toLowerCase();
 
-  let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${country}&api-key=AEx1aQzAkBudyq3qGIH76OMG0Yt10suE`;
+  //let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${country}&api-key=AEx1aQzAkBudyq3qGIH76OMG0Yt10suE`;
+	let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${country}&sort=newest&api-key=AEx1aQzAkBudyq3qGIH76OMG0Yt10suE`;
 
 	const sendGetRequest = async () => {
 	    try {
@@ -86,7 +90,7 @@ const setArticle = asyncHandler(async (req, res) => {
 	sendGetRequest();
 
 
-	if(j < country_list.length){
+	if(j < country_list_media.length){
 		j++;
 	}
 

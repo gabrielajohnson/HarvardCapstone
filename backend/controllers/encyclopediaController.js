@@ -3,6 +3,116 @@ const axios = require('axios');
 const Encyclopedia = require('../models/encyclopediaModel');
 
 
+var country_list_media = [
+
+        {
+            "articleId": 368333,
+            "articleTypeId": 45,
+            "title": "Côte dIvoire",
+            "lastUpdated": "2021-08-04"
+        },
+
+        {
+            "articleId": 361394,
+            "articleTypeId": 45,
+            "title": "Republic of the Congo",
+            "lastUpdated": "2021-08-04"
+        },
+
+        {
+            "articleId": 362142,
+            "articleTypeId": 45,
+            "title": "Czech Republic",
+            "lastUpdated": "2021-08-04"
+        },
+
+        {
+            "articleId": 365197,
+            "articleTypeId": 45,
+            "title": "The Gambia",
+            "lastUpdated": "2021-08-04"
+        },
+        
+        {
+            "articleId": 381820,
+            "articleTypeId": 45,
+            "title": "Vatican City",
+            "lastUpdated": "2021-08-04"
+        },
+        {
+            "articleId": 372075,
+            "articleTypeId": 45,
+            "title": "Federated States of Micronesia",
+            "lastUpdated": "2021-08-04"
+        },
+
+        {
+            "articleId": 372993,
+            "articleTypeId": 45,
+            "title": "Namibia",
+            "lastUpdated": "2021-08-04"
+        },
+
+        {
+            "articleId": 373136,
+            "articleTypeId": 45,
+            "title": "Nauru",
+            "lastUpdated": "2021-08-04"
+        },
+
+        {
+            "articleId": 373238,
+            "articleTypeId": 45,
+            "title": "Nepal",
+            "lastUpdated": "2021-08-04"
+        },
+
+        {
+            "articleId": 374416,
+            "articleTypeId": 45,
+            "title": "Palestine",
+            "lastUpdated": "2021-08-04"
+        },
+
+        {
+            "articleId": 380794,
+            "articleTypeId": 45,
+            "title": "Timor",
+            "lastUpdated": "2021-08-04"
+        },
+
+        {
+            "articleId": 381542,
+            "articleTypeId": 45,
+            "title": "United Kingdom of Great Britain and Northern Ireland",
+            "lastUpdated": "2021-08-04"
+        },
+
+        {
+            "articleId": 381558,
+            "articleTypeId": 45,
+            "title": "United States",
+            "lastUpdated": "2021-08-04"
+        }
+];
+
+/*
+* Côte d'Ivoire (Côte dIvoire)
+* Republic of the Congo
+* Czech Republic
+* The Gambia
+* Holy See (The Vatican)
+* Federated States of Micronesia
+* Namibia
+* Nauru
+* Nepal
+* Palestine
+* Timor
+* United Kingdom of Great Britain and Northern Ireland
+* United States
+*/
+
+
 // @desc Get encyclopedia
 // @route  GET /api/encyclopedia
 // @access Private
@@ -40,8 +150,8 @@ const setEncyclopedia = asyncHandler(async (req, res) => {
 
   setInterval(function(){ 
 
-  const country = country_list[j].title.toLowerCase();
-  const pageId = country_list[j].articleId;
+  const country = country_list_media[j].title.toLowerCase();
+  const pageId = country_list_media[j].articleId;
 
   const getData = async () => {
     
@@ -113,7 +223,7 @@ const setEncyclopedia = asyncHandler(async (req, res) => {
 
         getData();
 
-      if(j < country_list.length){
+      if(j < country_list_media.length){
           j++;
       }
 
