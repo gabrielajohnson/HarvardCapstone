@@ -20,7 +20,6 @@ app.use(cors()); // to allow cross origin requests
 app.use(bodyParser.json()); // to convert the request into JSON
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use('/api/goals', require('./routes/api/goalRoutes'))
 app.use('/api/books', require('./routes/api/bookRoutes'))
 app.use('/api/podcasts', require('./routes/api/podcastRoutes'))
 app.use('/api/articles', require('./routes/api/articleRoutes'))
@@ -34,7 +33,6 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/public/'));
 
   // Handle SPA
-
   app.get(/.*/, (req, res) => {
       res.sendFile(path.join(__dirname + '/public/index.html'));
   })

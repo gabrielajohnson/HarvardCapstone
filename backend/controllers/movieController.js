@@ -5,28 +5,6 @@ const axios = require('axios');
 
 const Movie = require('../models/movieModel');
 
-var country_list_media = ["Antigua and barbuda", 
-"Bosnia and herzegovina",
-"Central african republic",
-"Democratic republic of the congo",
-"Equatorial guinea",
-"Eswatini",
-"Holy See",
-"Lesotho",
-"North macedonia",
-"Saint kitts and nevis",
-"Saint lucia",
-"Saint vincent and the grenadines",
-"Sao tome and principe",
-"United arab emirates"];
-
-//var country_list_media = var country_list_media = ["Antigua and Barbuda","Bosnia and Herzegovina","Côte d'Ivoire","Cabo Verde","Canada","Central African Republic","Comoros","Czechia","Democratic Republic of the Congo","Eritrea","Eswatini","Guinea-Bissau","Holy See","Kiribati","Kyrgyzstan","Marshall Islands","Micronesia","Myanmar","Nauru","North Korea","North Macedonia","Palau","Palestine State","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Sao Tome and Principe","Solomon Islands","Somalia","South Sudan","Timor-Leste","Trinidad and Tobago","Tuvalu","United States of America","Vanuatu"];
-//var country_list_media = ["Equatorial Guinea","Lesotho","United Arab Emirates","Antigua and Barbuda","Bosnia and Herzegovina","Côte d'Ivoire","Cabo Verde","Canada","Central African Republic","Comoros","Czechia","Democratic Republic of the Congo","Eritrea","Eswatini","Guinea-Bissau","Holy See","Kiribati","Kyrgyzstan","Marshall Islands","Micronesia","Myanmar","Nauru","North Korea","North Macedonia","Palau","Palestine State","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Sao Tome and Principe","Solomon Islands","Somalia","South Sudan","Timor-Leste","Trinidad and Tobago","Tuvalu","United States of America","Vanuatu"];
-
-
-
-//var country_list = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
-
 // @desc Get movie
 // @route  GET /api/movie
 // @access Private

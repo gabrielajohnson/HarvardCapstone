@@ -134,16 +134,6 @@ const getEncyclopedia = asyncHandler(async (req, res) => {
 // @access Private
 const setEncyclopedia = asyncHandler(async (req, res) => {
 
-  /*for(let j = 0; j < country_list.length; j++){
-    console.log("{");
-
-    console.log("articleId: " + country_list[j].articleId);
-    console.log("articleTypeId: " + country_list[j].articleTypeId);
-    console.log("title: " + country_list[j].title);
-    console.log("lastUpdated: " + country_list[j].lastUpdated);
-
-    console.log("}");
-  }*/
 
 
   let j = 0;
@@ -158,7 +148,6 @@ const setEncyclopedia = asyncHandler(async (req, res) => {
     // Make HTTP Fetch
     const response = await axios.get(
       // Main API "https://syndication.api.eb.com/production/articles?articleTypeId=1&categoryId=7&lastUpdated=1990-03-20&page=1",
-      //Concise API article id = 45
       "https://syndication.api.eb.com/production/articles?articleTypeId=45&categoryId=7&lastUpdated=1990-03-20&page=1",
       {
         headers: {
@@ -168,8 +157,6 @@ const setEncyclopedia = asyncHandler(async (req, res) => {
         },
       }).then(response => {
         res.status(200);
-        //res.send(response.data);
-        //console.log("articles", response.data);
       })
       .catch(error => {
         console.log(error);
@@ -186,19 +173,11 @@ const setEncyclopedia = asyncHandler(async (req, res) => {
         },
       })
       .then((data) => {
-              	//console.log(data);
-                //var xml = new XMLParser().parseFromString(data)
-                
-                //var xml = new XMLParser().parse(data.data);
-                
-                //setArticle({ article: xml.children[0] })
-                //console.log(xml.children[0]);
 
           // Extract ID
           const paragraph = data.request.path;
           const regex = /[\d]+/g;
           const foundId = paragraph.match(regex);
-          //console.log(foundId[0]);
 
           try{
             const encyclopedia = Encyclopedia.create({
@@ -213,8 +192,6 @@ const setEncyclopedia = asyncHandler(async (req, res) => {
             console.error(err);
           }
     
-            //res.send(data.data);
-                //console.log(xml);
           }).catch(error => {
             console.log(error);
           });
