@@ -1,8 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const axios = require('axios');
 
-//var country_list_media = ["Eswatini"];
-
 const Movie = require('../models/movieModel');
 
 // @desc Get movie

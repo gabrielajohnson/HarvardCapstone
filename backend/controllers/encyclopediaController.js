@@ -96,21 +96,6 @@ var country_list_media = [
         }
 ];
 
-/*
-* Côte d'Ivoire (Côte dIvoire)
-* Republic of the Congo
-* Czech Republic
-* The Gambia
-* Holy See (The Vatican)
-* Federated States of Micronesia
-* Namibia
-* Nauru
-* Nepal
-* Palestine
-* Timor
-* United Kingdom of Great Britain and Northern Ireland
-* United States
-*/
 
 
 // @desc Get encyclopedia
@@ -152,7 +137,6 @@ const setEncyclopedia = asyncHandler(async (req, res) => {
       {
         headers: {
           "Content-Type": "application/json",
-          //"x-api-key": "2ff132d7-2420-4396-9a84-d6e25018a64d",
           "x-api-key": "d2844c5b-f96e-407a-a8ad-7d2a4d933cc1"
         },
       }).then(response => {
@@ -168,7 +152,6 @@ const setEncyclopedia = asyncHandler(async (req, res) => {
       {
         headers: {
           "Content-Type": "text/xml",
-          //"x-api-key": "2ff132d7-2420-4396-9a84-d6e25018a64d",
           "x-api-key": "d2844c5b-f96e-407a-a8ad-7d2a4d933cc1"
         },
       })
